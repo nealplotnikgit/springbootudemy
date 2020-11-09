@@ -23,6 +23,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor //need this because creating the explicit constructor will not create the default one, but this is needed for JPA
 @Table(name = "student")
+//test git
 //default constructor is required - already provided since no other is defined
 public class Student {
 	@Id
