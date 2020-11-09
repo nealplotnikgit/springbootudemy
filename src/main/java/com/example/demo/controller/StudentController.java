@@ -25,6 +25,7 @@ import com.example.demo.request.CreateStudentRequest;
 import com.example.demo.request.InBodyRequest;
 import com.example.demo.request.UpdateStudentRequest;
 import com.example.demo.response.StudentResponse;
+import com.example.demo.service.AddressService;
 import com.example.demo.service.StudentService;
 
 @RestController
@@ -35,6 +36,8 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService service;
+	@Autowired
+	private AddressService addressService;
 	
 	//fake one
 	@GetMapping("/get")
@@ -106,6 +109,14 @@ public class StudentController {
 		List<Student> students = service.getByFirstName(firstName);
 		List<StudentResponse> listresponse = new ArrayList<StudentResponse>();
 		students.stream().forEach(student -> listresponse.add(new StudentResponse(student)));
+		return listresponse;
+				
+	}
+	@GetMapping("/getAddressByID/{id}")
+	public List<StudentResponse> getAddressById(@PathVariable("id") Long id) {
+		List<Address> addresses = addressService.getAddressById(id);
+		List<StudentResponse> listresponse = new ArrayList<StudentResponse>();
+		addresses.stream().forEach(address -> listresponse.add(new StudentResponse(address)));
 		return listresponse;
 				
 	}

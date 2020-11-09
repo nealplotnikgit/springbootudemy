@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,5 +31,8 @@ public class Address {
 	private String city;
 	@Column(name = "state")
 	private String state;
+	//bidirectional relationship. since this is the non owning class, use mapped by, creates relationship to the parent / owning table
+	@OneToOne(mappedBy="address")
+	private Student student;
 	
 }

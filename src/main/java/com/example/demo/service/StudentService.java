@@ -103,4 +103,5 @@ public class StudentService {
 	public List<Student> getByStateJPQL(String state) {
 		return studentRepo.getByState(state);
 	}
+
 }

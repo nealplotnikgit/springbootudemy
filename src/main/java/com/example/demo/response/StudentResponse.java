@@ -37,5 +37,14 @@ public class StudentResponse {
 		this.state = s.getAddress().getState();
 		this.address = s.getAddress();
 	}
+	public StudentResponse(Address a) {
+		this.id = a.getStudent().getId();
+		this.firstName = a.getStudent().getFirstName();
+		this.lastName = a.getStudent().getLastName();
+		this.email = a.getStudent().getEmail();
+		this.city = a.getCity();
+		this.state = a.getState();
+//		this.address = a;
+	}
 	
 }

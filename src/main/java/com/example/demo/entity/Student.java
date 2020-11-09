@@ -39,6 +39,7 @@ public class Student {
 	
 //	@OneToOne(fetch = FetchType.LAZY)
 	@OneToOne(fetch = FetchType.EAGER) //this is default
+	// using the join on the owning side creates a relationship to the child table
 	@JoinColumn(name = "address_id")
 	private Address address;
 	

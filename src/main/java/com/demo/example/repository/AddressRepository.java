@@ -1,6 +1,7 @@
 package com.demo.example.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,7 +16,7 @@ import com.example.demo.entity.Student;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long>{//combo of CRUDRepository and PagingAndSortingRepository
 
-	
+	List<Address> findAllById(Long id);
 
 }
 
