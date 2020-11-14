@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -13,10 +14,14 @@ import org.springframework.stereotype.Service;
 
 import com.demo.example.repository.AddressRepository;
 import com.demo.example.repository.StudentRepository;
+import com.demo.example.repository.SubjectRepository;
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Subject;
 import com.example.demo.request.CreateStudentRequest;
+import com.example.demo.request.CreateSubjectRequest;
 import com.example.demo.request.UpdateStudentRequest;
+
 
 @Service
 public class StudentService {
@@ -24,6 +29,8 @@ public class StudentService {
 	private StudentRepository studentRepo;
 	@Autowired
 	private AddressRepository addressRepo;
+	@Autowired
+	private SubjectRepository subjectRepo;
 	
 	public List<Student> getAllStudents() {
 		return studentRepo.findAll();
@@ -39,6 +46,20 @@ public class StudentService {
 		
 		student.setAddress(address);//adds the address which contains the generated ID so that it joins
 		student = studentRepo.save(student);
+		
+		List subjectList = new ArrayList();
+		if (csr.getSubjects() != null) {
+			for (CreateSubjectRequest subjectRequest: csr.getSubjects()) {
+				Subject s = new Subject();
+				s.setMarks(subjectRequest.getMarks());
+				s.setSubjectName(subjectRequest.getName());
+				s.setStudent(student);
+				subjectList.add(s); //create a list for each subject
+			}
+		List<Subject> subjects = subjectRepo.saveAll(subjectList);
+		student.setSubjects(subjects);
+		}
+		
 		return student;
 	}
 

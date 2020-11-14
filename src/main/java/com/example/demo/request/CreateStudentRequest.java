@@ -1,5 +1,7 @@
 package com.example.demo.request;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import com.example.demo.entity.Student;
@@ -22,5 +24,7 @@ public class CreateStudentRequest {
 	private String email;
 	private String city;
 	private String state;
+	
+	private List<CreateSubjectRequest> subjects;
 	
 }

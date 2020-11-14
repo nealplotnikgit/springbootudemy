@@ -1,7 +1,11 @@
 package com.example.demo.response;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.Subject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,6 +31,7 @@ public class StudentResponse {
 	private String city;
 	private String state;
 	private Address address; // lets see how this looks as an object
+	private List<SubjectResponse> subjects; 
 	
 	public StudentResponse(Student s) {
 		this.id = s.getId();
@@ -36,6 +41,11 @@ public class StudentResponse {
 		this.city = s.getAddress().getCity();
 		this.state = s.getAddress().getState();
 		this.address = s.getAddress();
+		List<SubjectResponse> subres = new ArrayList();
+		for (Subject sub : s.getSubjects()) {
+			subres.add(new SubjectResponse(sub));
+		}
+		this.subjects = subres;
 	}
 	public StudentResponse(Address a) {
 		this.id = a.getStudent().getId();
