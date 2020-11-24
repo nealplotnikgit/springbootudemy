@@ -28,9 +28,11 @@ public class StudentResponse {
 	private String firstName;
 	private String lastName;
 	private String email;
+	@JsonIgnore
 	private String city;
+	@JsonIgnore
 	private String state;
-	private Address address; // lets see how this looks as an object
+	private AddressResponse address; // lets see how this looks as an object
 	private List<SubjectResponse> subjects; 
 	
 	public StudentResponse(Student s) {
@@ -40,7 +42,8 @@ public class StudentResponse {
 		this.email = s.getEmail();
 		this.city = s.getAddress().getCity();
 		this.state = s.getAddress().getState();
-		this.address = s.getAddress();
+		AddressResponse a = new AddressResponse(s.getAddress());
+		this.address = a;
 		List<SubjectResponse> subres = new ArrayList();
 		for (Subject sub : s.getSubjects()) {
 			subres.add(new SubjectResponse(sub));
